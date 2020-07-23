@@ -7,11 +7,11 @@ function TodoList(props){
         <div>
             <h1>Todo List:</h1>
             <ul>
-                {props.todos.map(todo => (
-                    <Todo todo={todo} />
+                {props.todos.map((todo, i) => (
+                    <Todo key={i} todo={todo} toggleCompleted={props.toggleCompleted} />
                 ))}
             </ul>
-            <TodoForm />
+            <TodoForm addTodo={props.addTodo} clearCompleted={props.clearCompleted} />
         </div>
     );
 }
