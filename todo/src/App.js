@@ -1,28 +1,20 @@
-import React, { useState } from 'react';
+import React, { useState, useReducer } from 'react';
 import TodoList from "./components/TodoList";
+import { intialTodoState, todoReducer } from "./reducers";
 import './App.css';
 
 function App() {
-  const [todos, setTodos] = useState([{
-    task: "learn reducers",
-    id: Date.now(),
-    completed: false
-  }]);
+  const [state, dispatch] = useReducer(todoReducer, intialTodoState);
+
+  const [newTodo, setNewTodo] = useState("");
 
   const addTodo = (taskItem) => {
-    setTodos([
-      ...todos,
-      {
-        task: taskItem,
-        id: Date.now(),
-        completed: false
-      }
-    ]);
-    console.log(todos);
+    setNewTodo(taskItem);
+    console.log(newTodo);
   };
 
   const toggleCompleted = (todoId) => {
-    setTodos(todos.map(todo => {
+    setNewTodo(newTodo.map(todo => {
       if(todo.id === todoId){
         return {
           ...todo,
@@ -34,14 +26,14 @@ function App() {
   };
 
   const clearCompleted = () => {
-    setTodos(todos.filter(todo =>{
+    setNewTodo(newTodo.filter(todo =>{
       return !todo.completed;
     }));
   };
 
   return (
     <div>
-      <TodoList todos={todos} addTodo={addTodo} toggleCompleted={toggleCompleted} clearCompleted={clearCompleted} />
+      <TodoList todos={state} dispatch={dispatch} />
     </div>
   );
 }

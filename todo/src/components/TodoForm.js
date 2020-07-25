@@ -9,7 +9,10 @@ function TodoForm(props){
 
     const submitHandler = (event) => {
         event.preventDefault();
-        props.addTodo(todoItem);
+        props.dispatch({
+            type: "ADD_TODO",
+            payload: todoItem
+        })
         setTodoItem("");
     };
     return(
@@ -18,7 +21,7 @@ function TodoForm(props){
                 <input name="todoItem" value={todoItem} onChange={changeHandler} />
                 <button>Add</button>
             </form>
-            <button onClick={props.clearCompleted}>Clear</button>
+            <button onClick={() => props.dispatch({type:"CLEAR_COMPLETE"})}>Clear</button>
         </>
     );
 }

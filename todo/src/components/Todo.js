@@ -3,7 +3,10 @@ import "./Todo.css";
 
 function Todo(props){
     const clickHandler = (event) => {
-        props.toggleCompleted(props.todo.id);
+        props.dispatch({
+            type: "TOGGLE_COMPLETE",
+            payload: props.todo.id
+        });
     };
     return(
         <li onClick={clickHandler} className={`task${props.todo.completed ? " completed" : ""}`} >{props.todo.task}</li>

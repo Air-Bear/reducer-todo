@@ -8,10 +8,10 @@ function TodoList(props){
             <h1>Todo List:</h1>
             <ul>
                 {props.todos.map((todo, i) => (
-                    <Todo key={i} todo={todo} toggleCompleted={props.toggleCompleted} />
+                    <Todo key={i} todo={todo} dispatch={props.dispatch} />
                 ))}
             </ul>
-            <TodoForm addTodo={props.addTodo} clearCompleted={props.clearCompleted} />
+            <TodoForm clearCompleted={props.clearCompleted} dispatch={props.dispatch} />
         </div>
     );
 }
